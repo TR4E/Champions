@@ -1,6 +1,7 @@
 package me.trae.champions.build;
 
 import me.trae.champions.build.interfaces.IBuildManager;
+import me.trae.champions.build.modules.PremadeClasses;
 import me.trae.champions.role.Role;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
@@ -22,6 +23,7 @@ public class BuildManager extends SpigotManager implements IBuildManager {
 
     @Override
     public void registerModules() {
+        addModule(new PremadeClasses(this));
     }
 
     @Override

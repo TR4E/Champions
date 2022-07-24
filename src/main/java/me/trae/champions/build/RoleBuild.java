@@ -57,8 +57,8 @@ public class RoleBuild implements IRoleBuild {
     }
 
     @Override
-    public RoleSkill getRoleSkill(final Skill<?, ?> skill) {
-        return this.getRoleSkills().getOrDefault(skill.getSkillType(), null);
+    public RoleSkill getRoleSkill(final SkillType skillType) {
+        return this.getRoleSkills().getOrDefault(skillType, null);
     }
 
     @Override

@@ -20,7 +20,7 @@ public interface IRoleBuild {
 
     void addRoleSkill(final Skill<?, ?> skill, final int level);
 
-    RoleSkill getRoleSkill(final Skill<?, ?> skill);
+    RoleSkill getRoleSkill(final SkillType skillType);
 
     boolean isRoleSkill(final Skill<?, ?> skill);
 
