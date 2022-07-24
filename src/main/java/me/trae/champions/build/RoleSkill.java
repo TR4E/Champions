@@ -28,7 +28,7 @@ public class RoleSkill implements IRoleSkill {
     }
 
     @Override
-    public void setLevel(int level) {
+    public void setLevel(final int level) {
         this.level = level;
     }
 
