@@ -1,7 +1,7 @@
 package me.trae.champions.build;
 
 import me.trae.champions.build.interfaces.IBuildManager;
-import me.trae.champions.build.modules.PremadeClasses;
+import me.trae.champions.build.listeners.PremadeClasses;
 import me.trae.champions.role.Role;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
@@ -96,6 +96,15 @@ public class BuildManager extends SpigotManager implements IBuildManager {
             return roleBuild;
         }
         return null;
+    }
+
+    @Override
+    public RoleBuild getActiveRoleBuildOrDefault(final Player player, final Role role) {
+        final RoleBuild activeRoleBuild = this.getActiveRoleBuild(player, role);
+        if (activeRoleBuild != null) {
+            return activeRoleBuild;
+        }
+        return new DefaultRoleBuild(player, role);
     }
 
     @Override

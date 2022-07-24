@@ -23,5 +23,7 @@ public interface IBuildManager {
 
     RoleBuild getActiveRoleBuild(final Player player, final Role role);
 
+    RoleBuild getActiveRoleBuildOrDefault(final Player player, final Role role);
+
     void setActiveRoleBuild(final Player player, final Role role, final RoleBuild roleBuild);
 }

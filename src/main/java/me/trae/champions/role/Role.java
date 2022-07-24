@@ -3,7 +3,7 @@ package me.trae.champions.role;
 import me.trae.champions.build.BuildManager;
 import me.trae.champions.build.RoleBuild;
 import me.trae.champions.build.RoleSkill;
-import me.trae.champions.build.modules.PremadeClasses;
+import me.trae.champions.build.listeners.PremadeClasses;
 import me.trae.champions.role.interfaces.IRole;
 import me.trae.champions.skill.enums.SkillType;
 import me.trae.core.framework.SpigotManager;
@@ -41,7 +41,7 @@ public abstract class Role extends SpigotManager implements IRole {
     public void sendEquipMessage(final Player player) {
         final BuildManager buildManager = getInstance().getManager(BuildManager.class);
 
-        final RoleBuild roleBuild = buildManager.getActiveRoleBuild(player, this);
+        final RoleBuild roleBuild = buildManager.getActiveRoleBuildOrDefault(player, this);
         if (roleBuild == null) {
             UtilMessage.message(player, "Build", ChatColor.RED + "Failed to load your Role Build, contact an administrator ASAP!");
             return;

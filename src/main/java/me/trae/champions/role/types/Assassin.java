@@ -23,4 +23,9 @@ public class Assassin extends Role {
                 Material.LEATHER_BOOTS
         };
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[0];
+    }
 }

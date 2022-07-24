@@ -1,4 +1,4 @@
-package me.trae.champions.build.modules;
+package me.trae.champions.build.listeners;
 
 import me.trae.champions.build.BuildManager;
 import me.trae.core.framework.SpigotListener;

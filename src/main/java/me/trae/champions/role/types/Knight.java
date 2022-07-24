@@ -23,4 +23,9 @@ public class Knight extends Role {
                 Material.IRON_BOOTS
         };
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[0];
+    }
 }

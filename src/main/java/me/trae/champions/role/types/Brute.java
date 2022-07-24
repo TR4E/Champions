@@ -23,4 +23,9 @@ public class Brute extends Role {
                 Material.DIAMOND_BOOTS
         };
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[0];
+    }
 }

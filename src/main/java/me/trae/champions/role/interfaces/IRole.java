@@ -9,6 +9,8 @@ public interface IRole {
 
     Material[] getArmour();
 
+    String[] getDescription();
+
     boolean hasArmour(final Player player);
 
     void sendEquipMessage(final Player player);

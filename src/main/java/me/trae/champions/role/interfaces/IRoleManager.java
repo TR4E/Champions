@@ -19,4 +19,6 @@ public interface IRoleManager {
     boolean hasPlayerRole(final Player player);
 
     boolean hasPlayerRole(final Player player, final Role role);
+
+    void giveKit(final Player player, final Role role);
 }

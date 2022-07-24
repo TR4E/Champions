@@ -16,6 +16,11 @@ public class DefaultRoleBuild extends RoleBuild {
                 continue;
             }
 
+            this.addRoleSkill(skill, skill.getDefaultSkillLevel());
         }
+    }
+
+    public DefaultRoleBuild(final Player player, final Role role) {
+        this(player, role, true);
     }
 }

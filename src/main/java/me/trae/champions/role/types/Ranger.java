@@ -23,4 +23,9 @@ public class Ranger extends Role {
                 Material.CHAINMAIL_BOOTS
         };
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[0];
+    }
 }

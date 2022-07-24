@@ -23,4 +23,9 @@ public class Mage extends Role {
                 Material.GOLD_BOOTS
         };
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[0];
+    }
 }

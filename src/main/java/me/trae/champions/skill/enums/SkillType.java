@@ -11,7 +11,6 @@ public enum SkillType {
 
     SWORD(ActionType.RIGHT_CLICK, Material.GOLD_SWORD, Material.DIAMOND_SWORD, Material.IRON_SWORD),
     AXE(ActionType.RIGHT_CLICK, Material.GOLD_AXE, Material.DIAMOND_AXE, Material.IRON_AXE),
-    SWORD_AND_AXE(ActionType.RIGHT_CLICK, Material.GOLD_SWORD, Material.DIAMOND_SWORD, Material.IRON_SWORD, Material.GOLD_AXE, Material.DIAMOND_AXE, Material.IRON_AXE),
     BOW(ActionType.LEFT_CLICK, Material.BOW),
     PASSIVE_A(null),
     PASSIVE_B(null),
