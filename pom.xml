@@ -15,11 +15,12 @@
     </properties>
 
     <dependencies>
+        <!-- Spigot-Core -->
         <dependency>
             <groupId>me.trae</groupId>
             <artifactId>Spigot-Core</artifactId>
             <version>1.0.0</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

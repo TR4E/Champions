@@ -52,6 +52,8 @@ public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
             return;
         }
 
+        this.getManager().setPlayerRole(player, role);
+
         if (role == null) {
             UtilMessage.message(player, "Class", UtilFormat.pairString("Armor Class", ChatColor.RED + "None"));
         } else {
