@@ -10,4 +10,12 @@ public class StandardSword extends VanillaItem {
     public StandardSword(final WeaponManager manager) {
         super(manager, new ItemStack(Material.IRON_SWORD));
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[]{
+                "",
+                "Just a Standard Sword."
+        };
+    }
 }

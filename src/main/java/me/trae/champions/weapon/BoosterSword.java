@@ -10,4 +10,12 @@ public class BoosterSword extends VanillaItem {
     public BoosterSword(final WeaponManager manager) {
         super(manager, new ItemStack(Material.GOLD_SWORD));
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[]{
+                "",
+                "Increases Skill Level by 1."
+        };
+    }
 }

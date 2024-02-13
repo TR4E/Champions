@@ -10,4 +10,12 @@ public class BoosterAxe extends VanillaItem {
     public BoosterAxe(final WeaponManager manager) {
         super(manager, new ItemStack(Material.GOLD_AXE));
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[]{
+                "",
+                "Increases Skill Level by 1."
+        };
+    }
 }

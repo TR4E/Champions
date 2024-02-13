@@ -10,4 +10,12 @@ public class StandardAxe extends VanillaItem {
     public StandardAxe(final WeaponManager manager) {
         super(manager, new ItemStack(Material.IRON_AXE));
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[]{
+                "",
+                "Just a Standard Axe."
+        };
+    }
 }

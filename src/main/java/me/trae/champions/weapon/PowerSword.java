@@ -10,4 +10,12 @@ public class PowerSword extends VanillaItem {
     public PowerSword(final WeaponManager manager) {
         super(manager, new ItemStack(Material.DIAMOND_SWORD));
     }
+
+    @Override
+    public String[] getDescription() {
+        return new String[]{
+                "",
+                "Increases Melee Damage by 1."
+        };
+    }
 }

@@ -9,6 +9,8 @@ import me.trae.framework.shared.utility.UtilFormat;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 
+import java.util.Arrays;
+
 public class HandleItemStackUpdate extends SpigotListener<RoleManager> {
 
     public HandleItemStackUpdate(final RoleManager manager) {
@@ -27,6 +29,7 @@ public class HandleItemStackUpdate extends SpigotListener<RoleManager> {
             }
 
             builder.setDisplayName(role.getName() + " " + UtilFormat.cleanString(material.name().split("_")[1]));
+            builder.setLore(Arrays.asList(role.getDescription()));
             break;
         }
     }
