@@ -1,7 +1,9 @@
 package me.trae.champions.role;
 
 import me.trae.champions.role.interfaces.IRoleManager;
+import me.trae.champions.role.modules.HandleItemStackUpdate;
 import me.trae.champions.role.modules.HandleRoleEquip;
+import me.trae.champions.role.roles.*;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
 import org.bukkit.entity.Player;
@@ -20,6 +22,15 @@ public class RoleManager extends SpigotManager implements IRoleManager {
 
     @Override
     public void registerModules() {
+        // Roles
+        addModule(new Assassin(this));
+        addModule(new Brute(this));
+        addModule(new Knight(this));
+        addModule(new Mage(this));
+        addModule(new Ranger(this));
+
+        // Modules
+        addModule(new HandleItemStackUpdate(this));
         addModule(new HandleRoleEquip(this));
     }
 

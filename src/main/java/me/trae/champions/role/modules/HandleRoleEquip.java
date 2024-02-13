@@ -8,6 +8,7 @@ import me.trae.core.utility.UtilServer;
 import me.trae.framework.shared.updater.annotations.Update;
 import me.trae.framework.shared.utility.UtilFormat;
 import me.trae.framework.shared.utility.enums.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -33,6 +34,8 @@ public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
 
             this.equip(player, playerRole);
         }
+
+        this.getManager().getPlayerRoles().keySet().removeIf(uuid -> Bukkit.getPlayer(uuid) == null);
     }
 
     private boolean hasArmour(final Player player, final Role role) {
