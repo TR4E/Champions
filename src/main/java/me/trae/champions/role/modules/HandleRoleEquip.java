@@ -2,6 +2,7 @@ package me.trae.champions.role.modules;
 
 import me.trae.champions.role.Role;
 import me.trae.champions.role.RoleManager;
+import me.trae.champions.role.events.RoleChangeEvent;
 import me.trae.core.framework.types.SpigotUpdater;
 import me.trae.core.utility.UtilMessage;
 import me.trae.core.utility.UtilServer;
@@ -62,5 +63,7 @@ public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
         } else {
             UtilMessage.message(player, "Class", UtilFormat.pairString("Armor Class", ChatColor.GREEN + role.getName()));
         }
+
+        UtilServer.callEvent(new RoleChangeEvent(player, role));
     }
 }

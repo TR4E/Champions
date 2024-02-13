@@ -2,13 +2,15 @@ package me.trae.champions.role.roles;
 
 import me.trae.champions.role.Role;
 import me.trae.champions.role.RoleManager;
+import me.trae.champions.role.roles.interfaces.Archer;
 import me.trae.core.utility.objects.SoundCreator;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class Ranger extends Role {
+public class Ranger extends Role implements Archer {
 
     public Ranger(final RoleManager manager) {
         super(manager);
@@ -16,7 +18,10 @@ public class Ranger extends Role {
 
     @Override
     public String[] getDescription() {
-        return new String[0];
+        return new String[]{
+                "Rangers are masters of the bow",
+                "sniping foes from afar!"
+        };
     }
 
     @Override
@@ -26,6 +31,6 @@ public class Ranger extends Role {
 
     @Override
     public SoundCreator getDamageSound() {
-        return null;
+        return new SoundCreator(Sound.ITEM_BREAK, 1.0F, 1.4F);
     }
 }

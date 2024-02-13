@@ -3,6 +3,7 @@ package me.trae.champions.role;
 import me.trae.champions.role.interfaces.IRoleManager;
 import me.trae.champions.role.modules.HandleItemStackUpdate;
 import me.trae.champions.role.modules.HandleRoleEquip;
+import me.trae.champions.role.modules.RemovePotionEffectsOnRoleChange;
 import me.trae.champions.role.roles.*;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
@@ -32,6 +33,7 @@ public class RoleManager extends SpigotManager implements IRoleManager {
         // Modules
         addModule(new HandleItemStackUpdate(this));
         addModule(new HandleRoleEquip(this));
+        addModule(new RemovePotionEffectsOnRoleChange(this));
     }
 
     @Override
