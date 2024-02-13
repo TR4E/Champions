@@ -6,7 +6,6 @@ import me.trae.champions.utility.UtilChampions;
 import me.trae.core.framework.types.SpigotListener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -29,10 +28,5 @@ public class RemovePotionEffectsOnRoleChange extends SpigotListener<RoleManager>
 
             player.removePotionEffect(potionEffectType);
         }
-    }
-
-    @EventHandler
-    public void onPlayerJoin(final PlayerJoinEvent event) {
-        final Player player = event.getPlayer();
     }
 }
