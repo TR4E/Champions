@@ -1,6 +1,7 @@
 package me.trae.champions.role.interfaces;
 
 import me.trae.champions.role.Role;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
@@ -18,5 +19,7 @@ public interface IRoleManager {
 
     boolean hasPlayerRole(final Player player);
 
-    void giveRole(final Player player, final Role role, final boolean overpowered);
+    Role searchRole(final CommandSender sender, final String name, final boolean inform);
+
+    void giveRole(final Player player, final Role role);
 }

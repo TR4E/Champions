@@ -9,11 +9,12 @@ import me.trae.core.utility.UtilServer;
 import me.trae.core.utility.objects.SoundCreator;
 import me.trae.framework.shared.updater.annotations.Update;
 import me.trae.framework.shared.utility.UtilFormat;
-import me.trae.framework.shared.utility.enums.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Collections;
 
 public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
 
@@ -63,11 +64,11 @@ public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
         if (role == null) {
             new SoundCreator(Sound.HORSE_ARMOR, 5.0F, 5.09F).play(player.getLocation());
 
-            UtilMessage.message(player, "Class", UtilFormat.pairString("Armor Class", ChatColor.RED + "None"));
+            UtilMessage.simpleMessage(player, "Class", UtilFormat.pairString("Armor Class", "<red>None</red>"));
         } else {
             new SoundCreator(Sound.HORSE_ARMOR, 2.0F, 1.09F).play(player.getLocation());
 
-            UtilMessage.message(player, "Class", UtilFormat.pairString("Armor Class", ChatColor.GREEN + role.getName()));
+            UtilMessage.simpleMessage(player, "Class", UtilFormat.pairString("Armor Class", "<green><var></green>"), Collections.singletonList(role.getName()));
         }
 
         UtilServer.callEvent(new RoleChangeEvent(player, role));

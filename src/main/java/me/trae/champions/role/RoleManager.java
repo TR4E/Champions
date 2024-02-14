@@ -1,19 +1,25 @@
 package me.trae.champions.role;
 
+import me.trae.champions.role.commands.RoleCommand;
 import me.trae.champions.role.interfaces.IRoleManager;
 import me.trae.champions.role.modules.HandleItemStackUpdate;
 import me.trae.champions.role.modules.HandleRoleEquip;
 import me.trae.champions.role.modules.RemovePotionEffectsOnRoleChange;
 import me.trae.champions.role.roles.*;
 import me.trae.champions.role.roles.interfaces.Archer;
+import me.trae.core.client.ClientManager;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
 import me.trae.core.item.ItemManager;
+import me.trae.core.utility.UtilJava;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class RoleManager extends SpigotManager implements IRoleManager {
 
@@ -22,6 +28,7 @@ public class RoleManager extends SpigotManager implements IRoleManager {
     public RoleManager(final SpigotPlugin instance) {
         super(instance);
 
+        this.addPrimitive("Overpowered-Kit", false);
         this.addPrimitive("Starter-Kit", false);
     }
 
@@ -33,6 +40,9 @@ public class RoleManager extends SpigotManager implements IRoleManager {
         addModule(new Knight(this));
         addModule(new Mage(this));
         addModule(new Ranger(this));
+
+        // Commands
+        addModule(new RoleCommand(this));
 
         // Modules
         addModule(new HandleItemStackUpdate(this));
@@ -66,7 +76,21 @@ public class RoleManager extends SpigotManager implements IRoleManager {
     }
 
     @Override
-    public void giveRole(final Player player, final Role role, final boolean overpowered) {
+    public Role searchRole(final CommandSender sender, final String name, final boolean inform) {
+        final List<Predicate<Role>> predicates = Arrays.asList(
+                (role -> role.getName().equalsIgnoreCase(name)),
+                (role -> role.getName().toLowerCase().contains(name.toLowerCase()))
+        );
+
+        final Function<Role, String> function = (Role::getName);
+
+        return UtilJava.search(Role.class, this.getModulesByClass(Role.class), predicates, null, function, "Role Search", sender, name, inform);
+    }
+
+    @Override
+    public void giveRole(final Player player, final Role role) {
+        final boolean overpowered = this.getPrimitiveCasted(Boolean.class, "Overpowered-Kit") || this.getInstance().getManagerByClass(ClientManager.class).getClientByPlayer(player).isAdministrating();
+
         final List<ItemStack> list = new ArrayList<>();
 
         list.add(new ItemStack(overpowered ? Material.DIAMOND_SWORD : Material.IRON_SWORD));
