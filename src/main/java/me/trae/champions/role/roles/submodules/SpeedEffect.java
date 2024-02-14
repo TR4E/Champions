@@ -13,11 +13,13 @@ public class SpeedEffect extends SpigotSubUpdater<Role> implements Listener {
 
     public SpeedEffect(final Role module) {
         super(module);
+
+        this.addPrimitive("Amplifier", 2);
     }
 
     @Update(delay = 250L)
     public void onUpdate() {
-        final int amplifier = 2;
+        final int amplifier = this.getPrimitiveCasted(Integer.class, "Amplifier");
 
         for (final Player player : this.getModule().getUsers()) {
             if (UtilEntity.hasPotionEffect(player, PotionEffectType.SPEED, amplifier)) {
