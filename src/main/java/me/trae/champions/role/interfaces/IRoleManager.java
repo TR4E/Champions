@@ -17,4 +17,6 @@ public interface IRoleManager {
     Role getPlayerRole(final Player player);
 
     boolean hasPlayerRole(final Player player);
+
+    void giveRole(final Player player, final Role role, final boolean overpowered);
 }

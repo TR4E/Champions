@@ -6,10 +6,12 @@ import me.trae.champions.role.events.RoleChangeEvent;
 import me.trae.core.framework.types.SpigotUpdater;
 import me.trae.core.utility.UtilMessage;
 import me.trae.core.utility.UtilServer;
+import me.trae.core.utility.objects.SoundCreator;
 import me.trae.framework.shared.updater.annotations.Update;
 import me.trae.framework.shared.utility.UtilFormat;
 import me.trae.framework.shared.utility.enums.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -59,8 +61,12 @@ public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
         this.getManager().setPlayerRole(player, role);
 
         if (role == null) {
+            new SoundCreator(Sound.HORSE_ARMOR, 5.0F, 5.09F).play(player.getLocation());
+
             UtilMessage.message(player, "Class", UtilFormat.pairString("Armor Class", ChatColor.RED + "None"));
         } else {
+            new SoundCreator(Sound.HORSE_ARMOR, 2.0F, 1.09F).play(player.getLocation());
+
             UtilMessage.message(player, "Class", UtilFormat.pairString("Armor Class", ChatColor.GREEN + role.getName()));
         }
 

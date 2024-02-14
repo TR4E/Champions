@@ -5,13 +5,15 @@ import me.trae.champions.role.modules.HandleItemStackUpdate;
 import me.trae.champions.role.modules.HandleRoleEquip;
 import me.trae.champions.role.modules.RemovePotionEffectsOnRoleChange;
 import me.trae.champions.role.roles.*;
+import me.trae.champions.role.roles.interfaces.Archer;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
+import me.trae.core.item.ItemManager;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class RoleManager extends SpigotManager implements IRoleManager {
 
@@ -19,6 +21,8 @@ public class RoleManager extends SpigotManager implements IRoleManager {
 
     public RoleManager(final SpigotPlugin instance) {
         super(instance);
+
+        this.addPrimitive("Starter-Kit", false);
     }
 
     @Override
@@ -59,5 +63,28 @@ public class RoleManager extends SpigotManager implements IRoleManager {
     @Override
     public boolean hasPlayerRole(final Player player) {
         return this.getPlayerRoles().containsKey(player.getUniqueId());
+    }
+
+    @Override
+    public void giveRole(final Player player, final Role role, final boolean overpowered) {
+        final List<ItemStack> list = new ArrayList<>();
+
+        list.add(new ItemStack(overpowered ? Material.DIAMOND_SWORD : Material.IRON_SWORD));
+        list.add(new ItemStack(overpowered ? Material.GOLD_AXE : Material.IRON_AXE));
+
+        if (role instanceof Archer) {
+            list.add(new ItemStack(Material.BOW));
+            list.add(new ItemStack(Material.ARROW, overpowered ? 64 : 32));
+        }
+
+        if (this.getPrimitiveCasted(Boolean.class, "Starter-Kit")) {
+            list.add(new ItemStack(overpowered ? Material.DIAMOND_SPADE : Material.IRON_SPADE));
+            list.add(new ItemStack(overpowered ? Material.DIAMOND_PICKAXE : Material.IRON_PICKAXE));
+        }
+
+        final ItemManager itemManager = this.getInstance().getManagerByClass(ItemManager.class);
+
+        itemManager.insertArmour(player, new ItemStack(role.getArmour().get(0)), new ItemStack(role.getArmour().get(1)), new ItemStack(role.getArmour().get(2)), new ItemStack(role.getArmour().get(3)));
+        itemManager.insert(player, list);
     }
 }
