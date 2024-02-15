@@ -17,7 +17,7 @@ import java.util.Arrays;
 public abstract class RoleSelectionMenu extends Menu<RoleManager> implements IRoleSelectionMenu {
 
     public RoleSelectionMenu(final RoleManager manager, final Player player) {
-        super(manager, player, 36, ChatColor.build(ChatColor.DARK_GREEN, ChatColor.BOLD) + "Select a Class");
+        super(manager, player, 36, ChatColor.build(ChatColor.GREEN, ChatColor.BOLD) + "Select a Class");
     }
 
     @Override

@@ -1,13 +1,13 @@
 package me.trae.champions.weapon;
 
 import me.trae.champions.weapon.interfaces.BoosterWeapon;
+import me.trae.champions.weapon.types.ChampionsWeapon;
 import me.trae.core.weapon.WeaponManager;
 import me.trae.core.weapon.data.WeaponData;
-import me.trae.core.weapon.types.VanillaItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class BoosterSword extends VanillaItem<WeaponData> implements BoosterWeapon {
+public class BoosterSword extends ChampionsWeapon<WeaponData> implements BoosterWeapon {
 
     public BoosterSword(final WeaponManager manager) {
         super(manager, new ItemStack(Material.GOLD_SWORD));
