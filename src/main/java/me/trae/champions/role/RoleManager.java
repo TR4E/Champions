@@ -2,6 +2,7 @@ package me.trae.champions.role;
 
 import me.trae.champions.role.commands.RoleCommand;
 import me.trae.champions.role.interfaces.IRoleManager;
+import me.trae.champions.role.modules.HandleCustomDeathMessageReceiver;
 import me.trae.champions.role.modules.HandleItemStackUpdate;
 import me.trae.champions.role.modules.HandleRoleEquip;
 import me.trae.champions.role.modules.RemovePotionEffectsOnRoleChange;
@@ -45,6 +46,7 @@ public class RoleManager extends SpigotManager implements IRoleManager {
         addModule(new RoleCommand(this));
 
         // Modules
+        addModule(new HandleCustomDeathMessageReceiver(this));
         addModule(new HandleItemStackUpdate(this));
         addModule(new HandleRoleEquip(this));
         addModule(new RemovePotionEffectsOnRoleChange(this));

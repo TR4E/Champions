@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface IRole {
 
+    String getPrefix();
+
     String[] getDescription();
 
     List<Material> getArmour();

@@ -17,6 +17,11 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
     }
 
     @Override
+    public String getPrefix() {
+        return this.getName().substring(0, 1);
+    }
+
+    @Override
     public List<Player> getUsers() {
         final List<Player> list = new ArrayList<>();
 
