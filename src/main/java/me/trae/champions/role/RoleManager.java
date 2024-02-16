@@ -11,7 +11,7 @@ import me.trae.core.client.ClientManager;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
 import me.trae.core.item.ItemManager;
-import me.trae.core.utility.UtilJava;
+import me.trae.core.utility.UtilSearch;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -84,7 +84,7 @@ public class RoleManager extends SpigotManager implements IRoleManager {
 
         final Function<Role, String> function = (Role::getName);
 
-        return UtilJava.search(Role.class, this.getModulesByClass(Role.class), predicates, null, function, "Role Search", sender, name, inform);
+        return UtilSearch.search(Role.class, this.getModulesByClass(Role.class), predicates, null, function, "Role Search", sender, name, inform);
     }
 
     @Override
