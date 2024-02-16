@@ -6,6 +6,7 @@ import me.trae.champions.role.modules.HandleCustomDeathMessageReceiver;
 import me.trae.champions.role.modules.HandleItemStackUpdate;
 import me.trae.champions.role.modules.HandleRoleEquip;
 import me.trae.champions.role.modules.RemovePotionEffectsOnRoleChange;
+import me.trae.champions.role.modules.restrictions.DisableShootingArrowsForNonArchers;
 import me.trae.champions.role.roles.*;
 import me.trae.champions.role.roles.interfaces.Archer;
 import me.trae.core.client.ClientManager;
@@ -44,6 +45,9 @@ public class RoleManager extends SpigotManager implements IRoleManager {
 
         // Commands
         addModule(new RoleCommand(this));
+
+        // Restrictions Modules
+        addModule(new DisableShootingArrowsForNonArchers(this));
 
         // Modules
         addModule(new HandleCustomDeathMessageReceiver(this));
