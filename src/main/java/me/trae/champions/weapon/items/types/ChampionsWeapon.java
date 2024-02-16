@@ -1,4 +1,4 @@
-package me.trae.champions.weapon.types;
+package me.trae.champions.weapon.items.types;
 
 import me.trae.core.weapon.WeaponManager;
 import me.trae.core.weapon.data.WeaponData;

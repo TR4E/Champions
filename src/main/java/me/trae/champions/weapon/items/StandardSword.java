@@ -1,6 +1,6 @@
-package me.trae.champions.weapon;
+package me.trae.champions.weapon.items;
 
-import me.trae.champions.weapon.types.ChampionsWeapon;
+import me.trae.champions.weapon.items.types.ChampionsWeapon;
 import me.trae.core.weapon.WeaponManager;
 import me.trae.core.weapon.data.WeaponData;
 import org.bukkit.Material;
