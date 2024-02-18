@@ -52,6 +52,6 @@ public class RoleSkill implements IRoleSkill {
 
     @Override
     public String toString() {
-        return String.join(":", Arrays.asList(this.getName(), String.valueOf(this.getLevel())));
+        return String.join(":", Arrays.asList(this.getType(), this.getName(), String.valueOf(this.getLevel())));
     }
 }
