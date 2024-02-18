@@ -1,5 +1,6 @@
 package me.trae.champions.role.interfaces;
 
+import me.trae.champions.build.data.RoleBuild;
 import me.trae.core.utility.objects.SoundCreator;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,4 +20,8 @@ public interface IRole {
     List<Player> getUsers();
 
     boolean isUserByPlayer(final Player player);
+
+    RoleBuild getDefaultRoleBuild();
+
+    RoleBuild getActiveRoleBuild(final Player player);
 }

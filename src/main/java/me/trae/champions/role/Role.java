@@ -1,5 +1,7 @@
 package me.trae.champions.role;
 
+import me.trae.champions.build.BuildManager;
+import me.trae.champions.build.data.RoleBuild;
 import me.trae.champions.role.interfaces.IRole;
 import me.trae.core.framework.SpigotModule;
 import org.bukkit.Bukkit;
@@ -44,5 +46,23 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
     @Override
     public boolean isUserByPlayer(final Player player) {
         return this.getManager().getPlayerRole(player) == this;
+    }
+
+    @Override
+    public RoleBuild getDefaultRoleBuild() {
+        return this.getInstance().getManagerByClass(BuildManager.class).getDefaultRoleBuildByRole(this);
+    }
+
+    @Override
+    public RoleBuild getActiveRoleBuild(final Player player) {
+        for (final RoleBuild roleBuild : this.getInstance().getManagerByClass(BuildManager.class).getRoleBuildsByRole(player, this).values()) {
+            if (!(roleBuild.isActive())) {
+                continue;
+            }
+
+            return roleBuild;
+        }
+
+        return null;
     }
 }

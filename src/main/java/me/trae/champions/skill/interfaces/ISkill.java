@@ -28,4 +28,8 @@ public interface ISkill<D extends SkillData> {
     default boolean isUserByPlayer(final Player player) {
         return this.getUsers().containsKey(player.getUniqueId());
     }
+
+    int getMaxLevel();
+
+    int getDefaultLevel();
 }

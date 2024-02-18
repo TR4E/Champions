@@ -31,4 +31,14 @@ public class Skill<R extends Role, D extends SkillData> extends SpigotSubModule<
     public Map<UUID, D> getUsers() {
         return this.users;
     }
+
+    @Override
+    public int getMaxLevel() {
+        return 5;
+    }
+
+    @Override
+    public int getDefaultLevel() {
+        return 0;
+    }
 }
