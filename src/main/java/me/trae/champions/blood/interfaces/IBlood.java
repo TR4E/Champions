@@ -1,9 +1,9 @@
 package me.trae.champions.blood.interfaces;
 
-import me.trae.framework.shared.utility.interfaces.IExpire;
-import me.trae.framework.shared.utility.interfaces.IGetDuration;
-import me.trae.framework.shared.utility.interfaces.IGetSystemTime;
-import me.trae.framework.shared.utility.interfaces.IRemaining;
+import me.trae.framework.shared.utility.interfaces.duration.IExpire;
+import me.trae.framework.shared.utility.interfaces.duration.IGetDuration;
+import me.trae.framework.shared.utility.interfaces.duration.IGetSystemTime;
+import me.trae.framework.shared.utility.interfaces.duration.IRemaining;
 import org.bukkit.entity.Item;
 
 import java.util.UUID;
