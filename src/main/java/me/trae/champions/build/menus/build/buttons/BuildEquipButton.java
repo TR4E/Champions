@@ -33,7 +33,7 @@ public abstract class BuildEquipButton extends Button<BuildCustomizationMenu> im
             if (roleBuild.getID() == 0) {
                 displayName = "<yellow><bold>Apply Default Build";
             } else {
-                displayName = String.format("<yellow><bold>Apply Custom Build %s", roleBuild.getID());
+                displayName = String.format("<yellow><bold>Apply Custom Build #%s", roleBuild.getID());
             }
         }
 

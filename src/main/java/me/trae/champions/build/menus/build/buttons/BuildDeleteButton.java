@@ -22,7 +22,7 @@ public abstract class BuildDeleteButton extends Button<BuildCustomizationMenu> i
 
     @Override
     public String getDisplayName() {
-        return String.format("<red><bold>Delete Custom Build %s", this.getID());
+        return String.format("<red><bold>Delete Custom Build #%s", this.getID());
     }
 
     @Override

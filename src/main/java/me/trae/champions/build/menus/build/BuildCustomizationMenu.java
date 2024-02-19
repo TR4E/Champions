@@ -79,11 +79,7 @@ public abstract class BuildCustomizationMenu extends Menu<BuildManager> implemen
             @Override
             public RoleBuild getRoleBuild() {
                 if (roleBuild == null) {
-                    final RoleBuild newRoleBuild = new RoleBuild(id, this.getMenu().getRole());
-
-                    this.getMenu().getManager().addRoleBuild(this.getMenu().getUUID(), newRoleBuild);
-
-                    return newRoleBuild;
+                    return new RoleBuild(id, this.getMenu().getRole());
                 }
 
                 return roleBuild;

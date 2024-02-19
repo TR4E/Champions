@@ -1,13 +1,11 @@
 package me.trae.champions.build.menus.skill;
 
 import me.trae.champions.build.BuildManager;
-import me.trae.champions.build.data.RoleBuild;
 import me.trae.champions.build.data.RoleSkill;
 import me.trae.champions.build.menus.skill.buttons.SkillPointsButton;
 import me.trae.champions.build.menus.skill.buttons.SkillSelectButton;
 import me.trae.champions.build.menus.skill.buttons.SkillTypeButton;
 import me.trae.champions.build.menus.skill.interfaces.ISkillEditMenu;
-import me.trae.champions.role.Role;
 import me.trae.champions.skill.Skill;
 import me.trae.champions.skill.enums.SkillType;
 import me.trae.core.client.Client;
@@ -16,8 +14,8 @@ import org.bukkit.entity.Player;
 
 public abstract class SkillEditMenu extends Menu<BuildManager> implements ISkillEditMenu {
 
-    public SkillEditMenu(final BuildManager manager, final Player player, final Role role, final RoleBuild roleBuild) {
-        super(manager, player, 54, String.format("<green><bold>%s Skill Page %s", role.getName(), roleBuild.getID()));
+    public SkillEditMenu(final BuildManager manager, final Player player, final String roleName, final int id) {
+        super(manager, player, 54, String.format("<green><bold>%s Skill Page #%s", roleName, id));
     }
 
     @Override
@@ -32,7 +30,7 @@ public abstract class SkillEditMenu extends Menu<BuildManager> implements ISkill
         int slot = 0;
 
         for (final SkillType skillType : SkillType.values()) {
-            addButton(new SkillTypeButton(this, slot, skillType) {
+            addButton(new SkillTypeButton(this, slot, skillType.getDisplayItemStack()) {
                 @Override
                 public SkillType getSkillType() {
                     return skillType;

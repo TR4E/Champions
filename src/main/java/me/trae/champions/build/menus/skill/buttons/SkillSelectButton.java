@@ -51,7 +51,10 @@ public abstract class SkillSelectButton extends Button<SkillEditMenu> implements
 
         final List<String> lore = new ArrayList<>(Arrays.asList(this.getSkill().getDescription(level)));
 
-        lore.add(" ");
+        for (int i = 0; i < 2; i++) {
+            lore.add(" ");
+        }
+
         lore.add(String.format(UtilFormat.pairString("<yellow>Skill Token Cost", "<white>%s</white>"), this.getSkill().getTokenCost()));
 
         return lore.toArray(new String[0]);

@@ -22,7 +22,7 @@ public abstract class BuildEditButton extends Button<BuildCustomizationMenu> imp
 
     @Override
     public String getDisplayName() {
-        return String.format("<green><bold>Edit Custom Build %s", this.getID());
+        return String.format("<green><bold>Edit Custom Build #%s", this.getID());
     }
 
     @Override
@@ -41,7 +41,7 @@ public abstract class BuildEditButton extends Button<BuildCustomizationMenu> imp
         final Role role = this.getMenu().getRole();
         final RoleBuild roleBuild = this.getRoleBuild();
 
-        new SkillEditMenu(this.getMenu().getManager(), player, role, roleBuild) {
+        new SkillEditMenu(this.getMenu().getManager(), player, role.getName(), roleBuild.getID()) {
             @Override
             public Role getRole() {
                 return role;
