@@ -1,12 +1,15 @@
 package me.trae.champions.build;
 
+import me.trae.champions.build.commands.BuildCommand;
 import me.trae.champions.build.data.RoleBuild;
 import me.trae.champions.build.data.RoleSkill;
 import me.trae.champions.build.interfaces.IBuildManager;
+import me.trae.champions.build.modules.HandleClassCustomizationTable;
 import me.trae.champions.role.Role;
 import me.trae.champions.skill.Skill;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
+import me.trae.framework.shared.utility.UtilJava;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -14,8 +17,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class BuildManager extends SpigotManager implements IBuildManager {
-
-    private final Map<String, RoleBuild> DEFAULT_ROLE_BUILDS = new HashMap<>();
 
     private final Map<UUID, Map<String, Map<Integer, RoleBuild>>> ROLE_BUILDS = new HashMap<>();
 
@@ -25,30 +26,11 @@ public class BuildManager extends SpigotManager implements IBuildManager {
 
     @Override
     public void registerModules() {
-    }
+        // Commands
+        addModule(new BuildCommand(this));
 
-    @Override
-    public Map<String, RoleBuild> getDefaultRoleBuilds() {
-        return this.DEFAULT_ROLE_BUILDS;
-    }
-
-    @Override
-    public RoleBuild getDefaultRoleBuildByRole(final Role role) {
-        if (!(this.getDefaultRoleBuilds().containsKey(role.getName()))) {
-            final RoleBuild roleBuild = new RoleBuild(0, role);
-
-            for (final Skill<?, ?> skill : role.getSubModulesByClass(Skill.class)) {
-                if (skill.getDefaultLevel() <= 0) {
-                    continue;
-                }
-
-                roleBuild.addSkill(new RoleSkill(skill, skill.getDefaultLevel()));
-            }
-
-            this.getDefaultRoleBuilds().put(role.getName(), roleBuild);
-        }
-
-        return this.getDefaultRoleBuilds().getOrDefault(role.getName(), null);
+        // Modules
+        addModule(new HandleClassCustomizationTable(this));
     }
 
     @Override
@@ -89,5 +71,45 @@ public class BuildManager extends SpigotManager implements IBuildManager {
     @Override
     public boolean isRoleBuildByID(final Player player, final Role role, final int id) {
         return this.getRoleBuildsByRole(player, role).containsKey(id);
+    }
+
+    @Override
+    public void setActiveRoleBuild(final Player player, final Role role, final RoleBuild roleBuild) {
+        for (final RoleBuild oldRoleBuild : this.getRoleBuildsByRole(player, role).values()) {
+            if (!(oldRoleBuild.isActive())) {
+                continue;
+            }
+
+            if (roleBuild != null && oldRoleBuild == roleBuild) {
+                continue;
+            }
+
+            oldRoleBuild.setActive(false);
+
+            // TODO: 19/02/2024 - Save Data
+        }
+
+        if (roleBuild == null || roleBuild.isActive()) {
+            return;
+        }
+
+        roleBuild.setActive(true);
+
+        if (roleBuild.getID() != 0) {
+            // TODO: 19/02/2024 - Save Data
+        }
+    }
+
+    @Override
+    public int getSkillPoints(final Role role, final RoleBuild roleBuild) {
+        int points = 12;
+
+        for (final RoleSkill roleSkill : roleBuild.getSkills().values()) {
+            final Skill<?, ?> skill = UtilJava.cast(Skill.class, role.getSubModuleByName(roleSkill.getName()));
+
+            points -= roleSkill.getLevel() * skill.getTokenCost();
+        }
+
+        return points;
     }
 }

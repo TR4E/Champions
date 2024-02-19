@@ -9,10 +9,6 @@ import java.util.UUID;
 
 public interface IBuildManager {
 
-    Map<String, RoleBuild> getDefaultRoleBuilds();
-
-    RoleBuild getDefaultRoleBuildByRole(final Role role);
-
     Map<UUID, Map<String, Map<Integer, RoleBuild>>> getRoleBuilds();
 
     void addRoleBuild(final UUID uuid, final RoleBuild roleBuild);
@@ -24,4 +20,8 @@ public interface IBuildManager {
     RoleBuild getRoleBuildByID(final Player player, final Role role, final int id);
 
     boolean isRoleBuildByID(final Player player, final Role role, final int id);
+
+    void setActiveRoleBuild(final Player player, final Role role, final RoleBuild roleBuild);
+
+    int getSkillPoints(final Role role, final RoleBuild roleBuild);
 }

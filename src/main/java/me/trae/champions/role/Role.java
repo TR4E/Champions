@@ -2,8 +2,12 @@ package me.trae.champions.role;
 
 import me.trae.champions.build.BuildManager;
 import me.trae.champions.build.data.RoleBuild;
+import me.trae.champions.build.data.types.DefaultRoleBuild;
 import me.trae.champions.role.interfaces.IRole;
+import me.trae.champions.skill.Skill;
+import me.trae.champions.skill.enums.SkillType;
 import me.trae.core.framework.SpigotModule;
+import me.trae.framework.shared.utility.UtilFormat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -49,8 +53,16 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
     }
 
     @Override
-    public RoleBuild getDefaultRoleBuild() {
-        return this.getInstance().getManagerByClass(BuildManager.class).getDefaultRoleBuildByRole(this);
+    public RoleBuild getDefaultRoleBuild(final Player player) {
+        final BuildManager buildManager = this.getInstance().getManagerByClass(BuildManager.class);
+
+        RoleBuild roleBuild = buildManager.getRoleBuildByID(player, this, 0);
+        if (roleBuild == null) {
+            roleBuild = new DefaultRoleBuild(this);
+            buildManager.addRoleBuild(player.getUniqueId(), roleBuild);
+        }
+
+        return roleBuild;
     }
 
     @Override
@@ -64,5 +76,39 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
         }
 
         return null;
+    }
+
+    @Override
+    public List<String> getEquipMessage(final RoleBuild roleBuild) {
+        final List<String> list = new ArrayList<>();
+
+        for (final SkillType skillType : SkillType.values()) {
+            String skillName = "";
+
+            if (roleBuild != null) {
+                if (roleBuild.isSkillByType(skillType)) {
+                    skillName = roleBuild.getSkillByType(skillType).getDisplayName();
+                }
+            }
+
+            list.add(String.format(UtilFormat.pairString("<green>%s", "<white>%s</white>"), skillType.getName(), skillName));
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Skill<?, ?>> getSkillsByType(final SkillType skillType) {
+        final List<Skill<?, ?>> list = new ArrayList<>();
+
+        for (final Skill<?, ?> skill : this.getSubModulesByClass(Skill.class)) {
+            if (skill.getType() != skillType) {
+                continue;
+            }
+
+            list.add(skill);
+        }
+
+        return list;
     }
 }

@@ -33,6 +33,11 @@ public class Skill<R extends Role, D extends SkillData> extends SpigotSubModule<
     }
 
     @Override
+    public String[] getDescription(final int level) {
+        return new String[0];
+    }
+
+    @Override
     public int getMaxLevel() {
         return 5;
     }
@@ -40,5 +45,10 @@ public class Skill<R extends Role, D extends SkillData> extends SpigotSubModule<
     @Override
     public int getDefaultLevel() {
         return 0;
+    }
+
+    @Override
+    public int getTokenCost() {
+        return 1;
     }
 }

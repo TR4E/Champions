@@ -4,7 +4,6 @@ import me.trae.champions.build.data.RoleBuild;
 import me.trae.champions.role.Role;
 import me.trae.champions.role.RoleManager;
 import me.trae.champions.role.events.RoleChangeEvent;
-import me.trae.champions.skill.enums.SkillType;
 import me.trae.core.framework.types.SpigotUpdater;
 import me.trae.core.utility.UtilMessage;
 import me.trae.core.utility.UtilServer;
@@ -16,7 +15,6 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
@@ -75,20 +73,12 @@ public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
 
             RoleBuild roleBuild = role.getActiveRoleBuild(player);
             if (roleBuild == null) {
-                roleBuild = role.getDefaultRoleBuild();
+                roleBuild = role.getDefaultRoleBuild(player);
             }
 
             UtilMessage.simpleMessage(player, "Skills", "Listing <light_purple><var></light_purple> Skills:", Collections.singletonList(roleBuild.getID() == 0 ? "Default Build" : String.format("Build #%s", roleBuild.getID())));
 
-            for (final SkillType skillType : SkillType.values()) {
-                String skillName = "";
-
-                if (roleBuild.isSkillByType(skillType)) {
-                    skillName = roleBuild.getSkillByType(skillType).getDisplayName();
-                }
-
-                UtilMessage.simpleMessage(player, null, UtilFormat.pairString("<green><var>", "<white><var></white>"), Arrays.asList(skillType.getName(), skillName));
-            }
+            role.getEquipMessage(roleBuild).forEach(string -> UtilMessage.simpleMessage(player, null, string));
         }
 
         UtilServer.callEvent(new RoleChangeEvent(player, role));

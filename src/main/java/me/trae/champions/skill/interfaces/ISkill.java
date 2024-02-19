@@ -29,7 +29,11 @@ public interface ISkill<D extends SkillData> {
         return this.getUsers().containsKey(player.getUniqueId());
     }
 
+    String[] getDescription(final int level);
+
     int getMaxLevel();
 
     int getDefaultLevel();
+
+    int getTokenCost();
 }
