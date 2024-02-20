@@ -7,6 +7,7 @@ import me.trae.champions.build.enums.RoleBuildProperty;
 import me.trae.champions.build.interfaces.IBuildManager;
 import me.trae.champions.build.modules.HandleClassCustomizationTable;
 import me.trae.champions.build.modules.HandleLoadRoleBuildDataOnPlayerJoin;
+import me.trae.champions.build.modules.HandleUnLoadRoleBuildDataOnPlayerQuit;
 import me.trae.champions.role.Role;
 import me.trae.champions.skill.Skill;
 import me.trae.core.framework.SpigotManager;
@@ -35,6 +36,7 @@ public class BuildManager extends SpigotManager implements IBuildManager, Reposi
         // Modules
         addModule(new HandleClassCustomizationTable(this));
         addModule(new HandleLoadRoleBuildDataOnPlayerJoin(this));
+        addModule(new HandleUnLoadRoleBuildDataOnPlayerQuit(this));
     }
 
     @Override

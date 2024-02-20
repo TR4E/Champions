@@ -25,7 +25,10 @@ public abstract class SkillSelectButton extends Button<SkillEditMenu> implements
     public SkillSelectButton(final SkillEditMenu menu, final int slot) {
         super(menu, slot, new ItemStack(Material.BOOK));
 
-        this.getItemBuilder().setGlowing(this.getRoleSkill() != null);
+        if (this.getRoleSkill() != null) {
+            this.getItemBuilder().getItemStack().setAmount(this.getRoleSkill().getLevel());
+            this.getItemBuilder().setGlowing(true);
+        }
     }
 
     @Override
@@ -132,5 +135,10 @@ public abstract class SkillSelectButton extends Button<SkillEditMenu> implements
         new SoundCreator(Sound.ORB_PICKUP).play(player);
 
         this.getMenu().refresh();
+    }
+
+    @Override
+    public long getClickDelay() {
+        return 100L;
     }
 }

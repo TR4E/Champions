@@ -3,21 +3,31 @@ package me.trae.champions.build;
 import me.trae.champions.build.data.RoleBuild;
 import me.trae.champions.build.enums.RoleBuildProperty;
 import me.trae.framework.shared.config.AbstractConfig;
+import me.trae.framework.shared.database.query.Query;
 import me.trae.framework.shared.database.query.types.DeleteQuery;
 import me.trae.framework.shared.database.query.types.SaveQuery;
 import me.trae.framework.shared.database.query.types.SingleCallbackQuery;
 import me.trae.framework.shared.database.query.types.UpdateQuery;
+import me.trae.framework.shared.database.query.types.interfaces.ICallbackQuery;
 import me.trae.framework.shared.database.repository.Repository;
 import me.trae.framework.shared.database.repository.types.SingleLoadRepository;
 import me.trae.framework.shared.database.repository.types.UpdateRepository;
 import me.trae.framework.shared.utility.objects.EnumData;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 public class BuildRepository extends Repository<BuildManager> implements UpdateRepository<RoleBuild, RoleBuildProperty>, SingleLoadRepository<UUID> {
 
     public BuildRepository(final BuildManager manager) {
         super(manager, "Builds");
+    }
+
+    @Override
+    public boolean isInform(final Query query) {
+        return query instanceof ICallbackQuery<?>;
     }
 
     @Override
@@ -67,10 +77,6 @@ public class BuildRepository extends Repository<BuildManager> implements UpdateR
         final SingleCallbackQuery<RoleBuildProperty> query = new SingleCallbackQuery<RoleBuildProperty>(uuid.toString()) {
             @Override
             public void onCallback(final EnumData<RoleBuildProperty> data) {
-                for (final Map.Entry<String, Object> entry : data.getMap().entrySet()) {
-                    System.out.println(entry.getKey() + ": " + entry.getValue().toString());
-                }
-
                 final RoleBuild roleBuild = new RoleBuild(data);
 
                 getManager().addRoleBuild(roleBuild);

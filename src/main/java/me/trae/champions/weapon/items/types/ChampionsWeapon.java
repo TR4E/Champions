@@ -10,9 +10,4 @@ public class ChampionsWeapon<D extends WeaponData> extends VanillaItem<D> {
     public ChampionsWeapon(final WeaponManager manager, final ItemStack itemStack) {
         super(manager, itemStack);
     }
-
-    @Override
-    public String getDisplayName() {
-        return String.format("<gold>%s", this.getName());
-    }
 }
