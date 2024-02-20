@@ -4,12 +4,15 @@ import me.trae.champions.build.data.RoleSkill;
 import me.trae.champions.skill.enums.SkillType;
 
 import java.util.LinkedHashMap;
+import java.util.UUID;
 
 public interface IRoleBuild {
 
-    int getID();
+    UUID getUUID();
 
     String getName();
+
+    int getID();
 
     LinkedHashMap<String, RoleSkill> getSkills();
 

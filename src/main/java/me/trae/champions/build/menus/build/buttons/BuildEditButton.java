@@ -52,7 +52,5 @@ public abstract class BuildEditButton extends Button<BuildCustomizationMenu> imp
                 return roleBuild;
             }
         };
-
-        this.getMenu().getManager().setActiveRoleBuild(player, this.getMenu().getRole(), roleBuild);
     }
 }

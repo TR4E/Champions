@@ -2,6 +2,7 @@ package me.trae.champions.build.menus.skill.buttons;
 
 import me.trae.champions.build.data.RoleBuild;
 import me.trae.champions.build.data.RoleSkill;
+import me.trae.champions.build.enums.RoleBuildProperty;
 import me.trae.champions.build.menus.skill.SkillEditMenu;
 import me.trae.champions.build.menus.skill.buttons.interfaces.ISkillSelectButton;
 import me.trae.champions.skill.Skill;
@@ -93,13 +94,16 @@ public abstract class SkillSelectButton extends Button<SkillEditMenu> implements
             roleBuild.addSkill(new RoleSkill(skill, 1));
         }
 
-        new SoundCreator(Sound.ORB_PICKUP).play(player);
-
         if (!(this.getMenu().getManager().isRoleBuildByID(player, this.getMenu().getRole(), roleBuild.getID()))) {
-            this.getMenu().getManager().addRoleBuild(player.getUniqueId(), roleBuild);
+            this.getMenu().getManager().addRoleBuild(roleBuild);
+            this.getMenu().getManager().getRepository().saveData(roleBuild);
+        } else {
+            this.getMenu().getManager().getRepository().updateData(roleBuild, RoleBuildProperty.SKILLS);
         }
 
-//        this.getMenu().getManager().getRepository().saveData(roleBuild);
+        this.getMenu().getManager().setActiveRoleBuild(player, this.getMenu().getRole(), roleBuild);
+
+        new SoundCreator(Sound.ORB_PICKUP).play(player);
 
         this.getMenu().refresh();
     }
@@ -114,14 +118,16 @@ public abstract class SkillSelectButton extends Button<SkillEditMenu> implements
             roleSkill.setLevel(roleSkill.getLevel() - 1);
         } else {
             roleBuild.removeSkill(roleSkill);
-
-            if (!(roleBuild.getSkills().isEmpty())) {
-//                this.getMenu().getManager().getRepository().saveData(roleBuild);
-            } else {
-                this.getMenu().getManager().removeRoleBuild(player.getUniqueId(), roleBuild);
-//                this.getMenu().getManager().getRepository().deleteData(roleBuild);
-            }
         }
+
+        if (!(roleBuild.getSkills().isEmpty())) {
+            this.getMenu().getManager().getRepository().updateData(roleBuild, RoleBuildProperty.SKILLS);
+        } else {
+            this.getMenu().getManager().removeRoleBuild(roleBuild);
+            this.getMenu().getManager().getRepository().deleteData(roleBuild);
+        }
+
+        this.getMenu().getManager().setActiveRoleBuild(player, this.getMenu().getRole(), roleBuild);
 
         new SoundCreator(Sound.ORB_PICKUP).play(player);
 

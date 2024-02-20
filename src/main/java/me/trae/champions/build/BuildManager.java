@@ -3,12 +3,15 @@ package me.trae.champions.build;
 import me.trae.champions.build.commands.BuildCommand;
 import me.trae.champions.build.data.RoleBuild;
 import me.trae.champions.build.data.RoleSkill;
+import me.trae.champions.build.enums.RoleBuildProperty;
 import me.trae.champions.build.interfaces.IBuildManager;
 import me.trae.champions.build.modules.HandleClassCustomizationTable;
+import me.trae.champions.build.modules.HandleLoadRoleBuildDataOnPlayerJoin;
 import me.trae.champions.role.Role;
 import me.trae.champions.skill.Skill;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
+import me.trae.framework.shared.database.repository.interfaces.RepositoryContainer;
 import me.trae.framework.shared.utility.UtilJava;
 import org.bukkit.entity.Player;
 
@@ -16,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class BuildManager extends SpigotManager implements IBuildManager {
+public class BuildManager extends SpigotManager implements IBuildManager, RepositoryContainer<BuildRepository> {
 
     private final Map<UUID, Map<String, Map<Integer, RoleBuild>>> ROLE_BUILDS = new HashMap<>();
 
@@ -31,6 +34,12 @@ public class BuildManager extends SpigotManager implements IBuildManager {
 
         // Modules
         addModule(new HandleClassCustomizationTable(this));
+        addModule(new HandleLoadRoleBuildDataOnPlayerJoin(this));
+    }
+
+    @Override
+    public Class<BuildRepository> getClassOfRepository() {
+        return BuildRepository.class;
     }
 
     @Override
@@ -39,12 +48,12 @@ public class BuildManager extends SpigotManager implements IBuildManager {
     }
 
     @Override
-    public void addRoleBuild(final UUID uuid, final RoleBuild roleBuild) {
-        if (!(this.getRoleBuilds().containsKey(uuid))) {
-            this.getRoleBuilds().put(uuid, new HashMap<>());
+    public void addRoleBuild(final RoleBuild roleBuild) {
+        if (!(this.getRoleBuilds().containsKey(roleBuild.getUUID()))) {
+            this.getRoleBuilds().put(roleBuild.getUUID(), new HashMap<>());
         }
 
-        final Map<String, Map<Integer, RoleBuild>> map = this.getRoleBuilds().get(uuid);
+        final Map<String, Map<Integer, RoleBuild>> map = this.getRoleBuilds().get(roleBuild.getUUID());
 
         if (!(map.containsKey(roleBuild.getName()))) {
             map.put(roleBuild.getName(), new HashMap<>());
@@ -54,8 +63,8 @@ public class BuildManager extends SpigotManager implements IBuildManager {
     }
 
     @Override
-    public void removeRoleBuild(final UUID uuid, final RoleBuild roleBuild) {
-        this.getRoleBuilds().getOrDefault(uuid, new HashMap<>()).getOrDefault(roleBuild.getName(), new HashMap<>()).remove(roleBuild.getID());
+    public void removeRoleBuild(final RoleBuild roleBuild) {
+        this.getRoleBuilds().getOrDefault(roleBuild.getUUID(), new HashMap<>()).getOrDefault(roleBuild.getName(), new HashMap<>()).remove(roleBuild.getID());
     }
 
     @Override
@@ -86,7 +95,7 @@ public class BuildManager extends SpigotManager implements IBuildManager {
 
             oldRoleBuild.setActive(false);
 
-            // TODO: 19/02/2024 - Save Data
+            this.getRepository().updateData(oldRoleBuild, RoleBuildProperty.ACTIVE);
         }
 
         if (roleBuild == null || roleBuild.isActive()) {
@@ -96,7 +105,7 @@ public class BuildManager extends SpigotManager implements IBuildManager {
         roleBuild.setActive(true);
 
         if (roleBuild.getID() != 0) {
-            // TODO: 19/02/2024 - Save Data
+            this.getRepository().updateData(roleBuild, RoleBuildProperty.ACTIVE);
         }
     }
 

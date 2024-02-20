@@ -58,8 +58,8 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
 
         RoleBuild roleBuild = buildManager.getRoleBuildByID(player, this, 0);
         if (roleBuild == null) {
-            roleBuild = new DefaultRoleBuild(this);
-            buildManager.addRoleBuild(player.getUniqueId(), roleBuild);
+            roleBuild = new DefaultRoleBuild(player.getUniqueId(), this);
+            buildManager.addRoleBuild(roleBuild);
         }
 
         return roleBuild;

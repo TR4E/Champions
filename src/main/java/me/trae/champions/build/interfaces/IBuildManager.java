@@ -11,9 +11,9 @@ public interface IBuildManager {
 
     Map<UUID, Map<String, Map<Integer, RoleBuild>>> getRoleBuilds();
 
-    void addRoleBuild(final UUID uuid, final RoleBuild roleBuild);
+    void addRoleBuild(final RoleBuild roleBuild);
 
-    void removeRoleBuild(final UUID uuid, final RoleBuild roleBuild);
+    void removeRoleBuild(final RoleBuild roleBuild);
 
     Map<Integer, RoleBuild> getRoleBuildsByRole(final Player player, final Role role);
 

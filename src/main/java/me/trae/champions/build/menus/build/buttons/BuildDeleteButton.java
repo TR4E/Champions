@@ -45,7 +45,9 @@ public abstract class BuildDeleteButton extends Button<BuildCustomizationMenu> i
 
         new SoundCreator(Sound.ITEM_BREAK).play(player);
 
-        this.getMenu().getManager().removeRoleBuild(player.getUniqueId(), roleBuild);
+        this.getMenu().getManager().removeRoleBuild(roleBuild);
+
+        this.getMenu().getManager().getRepository().deleteData(roleBuild);
 
         this.getMenu().refresh();
     }

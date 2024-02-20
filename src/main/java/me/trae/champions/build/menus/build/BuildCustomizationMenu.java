@@ -56,7 +56,7 @@ public abstract class BuildCustomizationMenu extends Menu<BuildManager> implemen
             @Override
             public RoleBuild getRoleBuild() {
                 if (id == 0) {
-                    return new DefaultRoleBuild(this.getMenu().getRole()) {
+                    return new DefaultRoleBuild(this.getMenu().getUUID(), this.getMenu().getRole()) {
                         @Override
                         public boolean isActive() {
                             return getManager().getRoleBuildsByRole(getPlayer(), getMenu().getRole()).values().stream().noneMatch(RoleBuild::isActive);
@@ -79,7 +79,7 @@ public abstract class BuildCustomizationMenu extends Menu<BuildManager> implemen
             @Override
             public RoleBuild getRoleBuild() {
                 if (roleBuild == null) {
-                    return new RoleBuild(id, this.getMenu().getRole());
+                    return new RoleBuild(this.getMenu().getUUID(), this.getMenu().getRole(), id);
                 }
 
                 return roleBuild;
