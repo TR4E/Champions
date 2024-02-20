@@ -25,11 +25,6 @@ public class BullsCharge extends Skill<Knight, SkillData> {
     }
 
     @Override
-    public int getMaxLevel() {
-        return 15;
-    }
-
-    @Override
     public int getDefaultLevel() {
         return 2;
     }
