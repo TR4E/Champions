@@ -7,4 +7,6 @@ import java.util.UUID;
 public interface ISkillData extends IGetSystemTime, IGetDuration, ISetDuration, IRemaining, IExpire {
 
     UUID getUUID();
+
+    int getLevel();
 }

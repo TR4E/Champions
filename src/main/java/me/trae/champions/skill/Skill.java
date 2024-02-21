@@ -4,7 +4,10 @@ import me.trae.champions.role.Role;
 import me.trae.champions.skill.data.SkillData;
 import me.trae.champions.skill.enums.SkillType;
 import me.trae.champions.skill.interfaces.ISkill;
+import me.trae.champions.weapon.items.interfaces.BoosterWeapon;
 import me.trae.core.framework.SpigotSubModule;
+import me.trae.core.weapon.WeaponManager;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +33,22 @@ public class Skill<R extends Role, D extends SkillData> extends SpigotSubModule<
     @Override
     public Map<UUID, D> getUsers() {
         return this.users;
+    }
+
+    @Override
+    public int getLevel(final Player player) {
+        final D data = this.getUserByPlayer(player);
+        if (data == null) {
+            return 0;
+        }
+
+        int level = data.getLevel();
+
+        if (this.getInstance().getManagerByClass(WeaponManager.class).getWeaponByItemStack(player.getInventory().getItemInHand()) instanceof BoosterWeapon) {
+            level += 1;
+        }
+
+        return level;
     }
 
     @Override
