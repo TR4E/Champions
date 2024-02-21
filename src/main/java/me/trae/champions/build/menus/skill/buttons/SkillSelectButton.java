@@ -136,9 +136,4 @@ public abstract class SkillSelectButton extends Button<SkillEditMenu> implements
 
         this.getMenu().refresh();
     }
-
-    @Override
-    public long getClickDelay() {
-        return 100L;
-    }
 }
