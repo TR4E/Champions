@@ -97,7 +97,9 @@ public class BuildManager extends SpigotManager implements IBuildManager, Reposi
 
             oldRoleBuild.setActive(false);
 
-            this.getRepository().updateData(oldRoleBuild, RoleBuildProperty.ACTIVE);
+            if (oldRoleBuild.getID() != 0) {
+                this.getRepository().updateData(oldRoleBuild, RoleBuildProperty.ACTIVE);
+            }
         }
 
         if (roleBuild == null || roleBuild.isActive()) {
