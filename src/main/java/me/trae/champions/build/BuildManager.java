@@ -113,7 +113,7 @@ public class BuildManager extends SpigotManager implements IBuildManager, Reposi
 
     @Override
     public int getSkillPoints(final Role role, final RoleBuild roleBuild) {
-        int points = 12;
+        int points = role.getMaxSkillTokens();
 
         for (final RoleSkill roleSkill : roleBuild.getSkills().values()) {
             final Skill<?, ?> skill = UtilJava.cast(Skill.class, role.getSubModuleByName(roleSkill.getName()));

@@ -30,4 +30,6 @@ public interface IRole {
     List<String> getEquipMessage(final RoleBuild roleBuild);
 
     List<Skill<?, ?>> getSkillsByType(final SkillType skillType);
+
+    int getMaxSkillTokens();
 }

@@ -111,4 +111,9 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
 
         return list;
     }
+
+    @Override
+    public int getMaxSkillTokens() {
+        return 12;
+    }
 }
