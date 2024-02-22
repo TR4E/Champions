@@ -2,8 +2,8 @@ package me.trae.champions.role.modules;
 
 import me.trae.champions.role.RoleManager;
 import me.trae.champions.role.events.RoleChangeEvent;
-import me.trae.champions.utility.UtilChampions;
 import me.trae.core.framework.types.SpigotListener;
+import me.trae.core.utility.UtilGame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.potion.PotionEffect;
@@ -22,7 +22,7 @@ public class RemovePotionEffectsOnRoleChange extends SpigotListener<RoleManager>
         for (final PotionEffect potionEffect : player.getActivePotionEffects()) {
             final PotionEffectType potionEffectType = potionEffect.getType();
 
-            if (UtilChampions.getNegativePotionEffects().contains(potionEffectType)) {
+            if (UtilGame.getNegativePotionEffects().contains(potionEffectType)) {
                 continue;
             }
 

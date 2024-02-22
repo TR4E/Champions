@@ -80,6 +80,8 @@ public class BuildRepository extends Repository<BuildManager> implements UpdateR
                 final RoleBuild roleBuild = new RoleBuild(data);
 
                 getManager().addRoleBuild(roleBuild);
+
+                patchData(roleBuild, data);
             }
 
             @Override

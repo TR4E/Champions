@@ -9,6 +9,7 @@ import me.trae.core.framework.SpigotSubModule;
 import me.trae.core.weapon.WeaponManager;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -44,7 +45,7 @@ public class Skill<R extends Role, D extends SkillData> extends SpigotSubModule<
 
         int level = data.getLevel();
 
-        if (this.getInstance().getManagerByClass(WeaponManager.class).getWeaponByItemStack(player.getInventory().getItemInHand()) instanceof BoosterWeapon) {
+        if (Arrays.asList(SkillType.SWORD, SkillType.AXE).contains(this.getType()) && this.getInstance().getManagerByClass(WeaponManager.class).getWeaponByItemStack(player.getInventory().getItemInHand()) instanceof BoosterWeapon) {
             level += 1;
         }
 
