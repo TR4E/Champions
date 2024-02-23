@@ -47,10 +47,7 @@ public class HandleActiveSkillActivation extends SpigotListener<SkillManager> {
             return;
         }
 
-        RoleBuild roleBuild = role.getActiveRoleBuildByPlayer(player);
-        if (roleBuild == null) {
-            roleBuild = role.getDefaultRoleBuildByPlayer(player);
-        }
+        final RoleBuild roleBuild = role.getRoleBuildByPlayer(player);
 
         final ActiveSkillType activeSkillType = ActiveSkillType.getByMaterial(itemStack.getType());
         if (activeSkillType == null) {
