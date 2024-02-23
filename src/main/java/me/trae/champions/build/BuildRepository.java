@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class BuildRepository extends Repository<BuildManager> implements UpdateRepository<RoleBuild, RoleBuildProperty>, SingleLoadRepository<UUID> {
+public class BuildRepository extends Repository<BuildManager> implements UpdateRepository<RoleBuild, RoleBuildProperty>, SingleLoadRepository {
 
     public BuildRepository(final BuildManager manager) {
         super(manager, "Builds");
@@ -99,5 +99,10 @@ public class BuildRepository extends Repository<BuildManager> implements UpdateR
         };
 
         this.addQuery(query);
+    }
+
+    @Override
+    public void wipeData() {
+        this.getManager().getRoleBuilds().clear();
     }
 }

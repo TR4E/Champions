@@ -29,9 +29,11 @@ public interface ISkill<D extends SkillData> {
         return this.getUsers().containsKey(player.getUniqueId());
     }
 
-    int getLevel(final Player player);
-
     String[] getDescription(final int level);
+
+    String getDisplayName(final int level);
+
+    int getLevel(final Player player);
 
     int getMaxLevel();
 

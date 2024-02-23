@@ -23,9 +23,11 @@ public interface IRole {
 
     boolean isUserByPlayer(final Player player);
 
-    RoleBuild getDefaultRoleBuild(final Player player);
+    RoleBuild getDefaultRoleBuildByPlayer(final Player player);
 
-    RoleBuild getActiveRoleBuild(final Player player);
+    RoleBuild getActiveRoleBuildByPlayer(final Player player);
+
+    RoleBuild getRoleBuildByPlayer(final Player player);
 
     List<String> getEquipMessage(final RoleBuild roleBuild);
 

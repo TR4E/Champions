@@ -1,12 +1,9 @@
 package me.trae.champions.skill.enums;
 
+import me.trae.champions.skill.types.enums.ActiveSkillType;
 import me.trae.framework.shared.utility.UtilFormat;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public enum SkillType implements ISkillType {
 
@@ -29,25 +26,6 @@ public enum SkillType implements ISkillType {
     }
 
     @Override
-    public List<Material> getMaterials() {
-        final List<Material> list = new ArrayList<>();
-
-        switch (this) {
-            case SWORD:
-                list.addAll(Arrays.asList(Material.IRON_SWORD, Material.GOLD_SWORD, Material.DIAMOND_SWORD));
-                break;
-            case AXE:
-                list.addAll(Arrays.asList(Material.IRON_AXE, Material.GOLD_AXE, Material.DIAMOND_AXE));
-                break;
-            case BOW:
-                list.add(Material.BOW);
-                break;
-        }
-
-        return list;
-    }
-
-    @Override
     public ItemStack getDisplayItemStack() {
         Material material = Material.INK_SACK;
         short durability = 0;
@@ -56,7 +34,7 @@ public enum SkillType implements ISkillType {
             case SWORD:
             case AXE:
             case BOW:
-                material = this.getMaterials().get(0);
+                material = ActiveSkillType.valueOf(this.name()).getMaterials().get(0);
                 break;
             case PASSIVE_A:
                 durability = 1;

@@ -53,7 +53,7 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
     }
 
     @Override
-    public RoleBuild getDefaultRoleBuild(final Player player) {
+    public RoleBuild getDefaultRoleBuildByPlayer(final Player player) {
         final BuildManager buildManager = this.getInstance().getManagerByClass(BuildManager.class);
 
         RoleBuild roleBuild = buildManager.getRoleBuildByID(player, this, 0);
@@ -66,7 +66,7 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
     }
 
     @Override
-    public RoleBuild getActiveRoleBuild(final Player player) {
+    public RoleBuild getActiveRoleBuildByPlayer(final Player player) {
         for (final RoleBuild roleBuild : this.getInstance().getManagerByClass(BuildManager.class).getRoleBuildsByRole(player, this).values()) {
             if (!(roleBuild.isActive())) {
                 continue;
@@ -76,6 +76,16 @@ public abstract class Role extends SpigotModule<RoleManager> implements IRole {
         }
 
         return null;
+    }
+
+    @Override
+    public RoleBuild getRoleBuildByPlayer(final Player player) {
+        RoleBuild roleBuild = this.getActiveRoleBuildByPlayer(player);
+        if (roleBuild == null) {
+            roleBuild = this.getDefaultRoleBuildByPlayer(player);
+        }
+
+        return roleBuild;
     }
 
     @Override

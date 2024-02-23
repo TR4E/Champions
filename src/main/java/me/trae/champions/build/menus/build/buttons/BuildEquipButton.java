@@ -42,6 +42,10 @@ public abstract class BuildEquipButton extends Button<BuildCustomizationMenu> im
 
     @Override
     public String[] getLore() {
+        if (this.getRoleBuild() == null) {
+            return new String[0];
+        }
+
         return this.getMenu().getRole().getEquipMessage(this.getRoleBuild()).toArray(new String[0]);
     }
 

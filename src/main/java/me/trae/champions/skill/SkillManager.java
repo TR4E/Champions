@@ -1,5 +1,6 @@
 package me.trae.champions.skill;
 
+import me.trae.champions.skill.modules.HandleActiveSkillActivation;
 import me.trae.core.framework.SpigotManager;
 import me.trae.core.framework.SpigotPlugin;
 
@@ -11,5 +12,6 @@ public class SkillManager extends SpigotManager {
 
     @Override
     public void registerModules() {
+        addModule(new HandleActiveSkillActivation(this));
     }
 }

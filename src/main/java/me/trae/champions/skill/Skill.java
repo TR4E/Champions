@@ -1,5 +1,6 @@
 package me.trae.champions.skill;
 
+import me.trae.champions.build.data.RoleBuild;
 import me.trae.champions.role.Role;
 import me.trae.champions.skill.data.SkillData;
 import me.trae.champions.skill.enums.SkillType;
@@ -14,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Skill<R extends Role, D extends SkillData> extends SpigotSubModule<R> implements ISkill<D> {
+public abstract class Skill<R extends Role, D extends SkillData> extends SpigotSubModule<R> implements ISkill<D> {
 
     private final SkillType skillType;
     private final Map<UUID, D> users;
@@ -37,24 +38,21 @@ public class Skill<R extends Role, D extends SkillData> extends SpigotSubModule<
     }
 
     @Override
-    public int getLevel(final Player player) {
-        final D data = this.getUserByPlayer(player);
-        if (data == null) {
-            return 0;
-        }
+    public String getDisplayName(final int level) {
+        return String.format("%s %s", this.getName(), level);
+    }
 
-        int level = data.getLevel();
+    @Override
+    public int getLevel(final Player player) {
+        final RoleBuild roleBuild = this.getModule().getRoleBuildByPlayer(player);
+
+        int level = roleBuild.getSkillByType(this.getType()).getLevel();
 
         if (Arrays.asList(SkillType.SWORD, SkillType.AXE).contains(this.getType()) && this.getInstance().getManagerByClass(WeaponManager.class).getWeaponByItemStack(player.getInventory().getItemInHand()) instanceof BoosterWeapon) {
             level += 1;
         }
 
         return level;
-    }
-
-    @Override
-    public String[] getDescription(final int level) {
-        return new String[0];
     }
 
     @Override

@@ -71,9 +71,9 @@ public class HandleRoleEquip extends SpigotUpdater<RoleManager> {
 
             UtilMessage.simpleMessage(player, "Class", UtilFormat.pairString("Armor Class", "<green><var></green>"), Collections.singletonList(role.getName()));
 
-            RoleBuild roleBuild = role.getActiveRoleBuild(player);
+            RoleBuild roleBuild = role.getActiveRoleBuildByPlayer(player);
             if (roleBuild == null) {
-                roleBuild = role.getDefaultRoleBuild(player);
+                roleBuild = role.getDefaultRoleBuildByPlayer(player);
             }
 
             UtilMessage.simpleMessage(player, "Skills", "Listing <light_purple><var></light_purple> Skills:", Collections.singletonList(roleBuild.getID() == 0 ? "Default Build" : String.format("Build #%s", roleBuild.getID())));
