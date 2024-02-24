@@ -8,6 +8,7 @@ import me.trae.core.recharge.RechargeManager;
 import me.trae.core.utility.UtilBlock;
 import me.trae.core.utility.UtilEntity;
 import me.trae.core.utility.UtilMessage;
+import me.trae.core.utility.enums.EffectType;
 import me.trae.framework.shared.utility.UtilFormat;
 import me.trae.framework.shared.utility.UtilTime;
 import org.bukkit.entity.Player;
@@ -45,7 +46,7 @@ public class BullsCharge extends ActiveSkill<Knight, SkillData> {
     @Override
     public void onActivate(final Player player, final int level) {
         if (this.getInstance().getManagerByClass(RechargeManager.class).add(player, this.getName(), this.getPrimitiveCasted(Long.class, "Recharge"), true)) {
-            UtilEntity.addPotionEffect(player, PotionEffectType.SPEED, this.getPrimitiveCasted(Long.class, "Duration"), this.getPrimitiveCasted(Integer.class, "Amplifier"));
+            UtilEntity.addPotionEffect(player, EffectType.SPEED, this.getPrimitiveCasted(Long.class, "Duration"), this.getPrimitiveCasted(Integer.class, "Amplifier"));
 
             UtilMessage.simpleMessage(player, this.getModule().getName(), "You used <green><var></green>.", Collections.singletonList(this.getDisplayName(level)));
         }

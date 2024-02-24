@@ -4,6 +4,7 @@ import me.trae.champions.role.Role;
 import me.trae.core.framework.types.SpigotSubUpdater;
 import me.trae.core.utility.UtilEntity;
 import me.trae.core.utility.UtilServer;
+import me.trae.core.utility.enums.EffectType;
 import me.trae.framework.shared.updater.annotations.Update;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -22,11 +23,11 @@ public class SpeedEffect extends SpigotSubUpdater<Role> implements Listener {
         final int amplifier = this.getPrimitiveCasted(Integer.class, "Amplifier");
 
         for (final Player player : this.getModule().getUsers()) {
-            if (UtilEntity.hasPotionEffect(player, PotionEffectType.SPEED, amplifier)) {
+            if (UtilEntity.hasPotionEffect(player, EffectType.SPEED, amplifier)) {
                 continue;
             }
 
-            UtilEntity.addPotionEffect(player, PotionEffectType.SPEED, Integer.MAX_VALUE, amplifier);
+            UtilEntity.addPotionEffect(player, EffectType.SPEED, Integer.MAX_VALUE, amplifier);
         }
     }
 
