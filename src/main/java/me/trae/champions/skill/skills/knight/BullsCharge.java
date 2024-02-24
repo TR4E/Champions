@@ -12,7 +12,6 @@ import me.trae.core.utility.enums.EffectType;
 import me.trae.framework.shared.utility.UtilFormat;
 import me.trae.framework.shared.utility.UtilTime;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collections;
 

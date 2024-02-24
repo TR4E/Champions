@@ -1,4 +1,4 @@
-package me.trae.champions.effect;
+package me.trae.champions.effect.types;
 
 import me.trae.core.effect.Effect;
 import me.trae.core.effect.EffectManager;
